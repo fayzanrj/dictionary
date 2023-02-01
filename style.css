@@ -111,4 +111,7 @@ label{
     .main-box{
         width: 90%;
     }
+    .explain-box{
+        font-size: .9rem;
+    }
 }
