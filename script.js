@@ -13,13 +13,16 @@ const labeltransition = () => {
 }
 
 search.addEventListener('focusout', () => {
-    label.style.top = '1.7rem'
-    label.style.left = ".7rem"
-    label.style.fontSize = "1rem"
+    if (search.value == "") {
+        label.style.top = '1.7rem'
+        label.style.left = ".7rem"
+        label.style.fontSize = "1rem"
+    }
 })
 
 searchBtn.addEventListener('click', () => {
     if (search.value != "") {
+        search.focus()
         meaning.innerHTML = ""
         word.innerHTML = ""
         explainBox1.innerHTML = ""
@@ -61,7 +64,7 @@ const getMeaning = (word) => {
 }
 
 
-const getExplanation = (word)=>{
+const getExplanation = (word) => {
     const options = {
         method: 'GET',
         headers: {
@@ -69,7 +72,7 @@ const getExplanation = (word)=>{
             'X-RapidAPI-Host': 'dictionary-by-api-ninjas.p.rapidapi.com'
         }
     };
-    
+
     fetch(`https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary?word=${word}`, options)
         .then(response => response.json())
         .then((response) => {
