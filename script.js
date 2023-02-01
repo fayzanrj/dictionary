@@ -22,7 +22,6 @@ search.addEventListener('focusout', () => {
 
 searchBtn.addEventListener('click', () => {
     if (search.value != "") {
-        search.focus()
         meaning.innerHTML = ""
         word.innerHTML = ""
         explainBox1.innerHTML = ""
@@ -32,7 +31,13 @@ searchBtn.addEventListener('click', () => {
             word.innerHTML = wordToTranslate
         }, 1000)
         getExplanation(wordToTranslate)
-        search.value = ""
+        if(search.value != ""){
+            search.value = ""
+            label.style.top = '1.7rem'
+            label.style.left = ".7rem"
+            label.style.fontSize = "1rem"
+        }
+        
     } else {
         console.log("a")
     }
@@ -58,6 +63,7 @@ const getMeaning = (word) => {
     fetch('https://google-translate1.p.rapidapi.com/language/translate/v2', options)
         .then(response => response.json())
         .then((response) => {
+            console.log(response)
             meaning.innerHTML = response.data.translations[0].translatedText
         })
         .catch(err => console.error(err));
@@ -79,8 +85,6 @@ const getExplanation = (word) => {
             // console.log(response)
             let array = response.definition.split('.')
             explainBox1.innerHTML = `${array[1]}.`
-            // explainBox3.innerHTML = array[2]
-            // explainBox2.innerHTML = array[3]
         })
         .catch((err) => {
             // console.error(err)
