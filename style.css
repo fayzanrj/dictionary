@@ -23,9 +23,11 @@
 .box{
     width: 35rem;
     height: 18rem;
+    display: flex;
+    justify-content: center;
 }
 .main-box{
-    width: 35rem;
+    width: 100%;
     height: fit-content;
     background-color: white;
     padding: 1.5rem;
@@ -82,8 +84,9 @@ label{
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 1.5rem;
+    padding: 0 .5rem;
     font-size: 2rem;
+    transition: 2s;
 }
 
 .end{
