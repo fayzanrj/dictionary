@@ -57,6 +57,7 @@ label{
 }
 
 .search-box button{
+    display: none;
     background-color: transparent;
     border: none;
     position: relative;
