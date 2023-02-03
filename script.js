@@ -70,28 +70,32 @@ const getExplanation = (word) => {
     })
 }
 
-searchBtn.addEventListener('click', () => {
-    if (search.value != "") {
-        wordToTranslate = search.value
-        getExplanation(wordToTranslate)
-        meaning.innerHTML = ""
-        word.innerHTML = firstLetterCapital(wordToTranslate)
-        explainbox.innerHTML = ""
-        if (search.value != "") {
-            search.value = ""
-            label.style.top = '1.7rem'
-            label.style.left = ".7rem"
-            label.style.fontSize = "1rem"
-        }
 
-    } else {
-        word.innerHTML= " "
-        explainbox.innerHTML = "<b>Write something before pressing Search</b>"
+search.addEventListener('keyup', (e) => {
+    if (e.keyCode >= 65 && e.keyCode <= 90 || e.keyCode == 8) {
+        if (search.value != "") {
+            word.innerHTML = firstLetterCapital(search.value)
+            wordToTranslate = search.value
+            getExplanation(wordToTranslate)
+            meaning.innerHTML = ""
+            explainbox.innerHTML = ""
+            if (search.value == "") {
+                label.style.top = '1.7rem'
+                label.style.left = ".7rem"
+                label.style.fontSize = "1rem"
+            }
+        } else {
+            word.innerHTML = " "
+            explainbox.innerHTML = ""
+        }
     }
+
 })
 
-const firstLetterCapital = (word)=>{
+const firstLetterCapital = (word) => {
     let fLetter = word[0]
     let lLetters = word.slice(1)
-     return (fLetter.toUpperCase() + lLetters.toLowerCase())
+    return (fLetter.toUpperCase() + lLetters.toLowerCase())
 }
+
+
