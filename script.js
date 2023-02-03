@@ -93,5 +93,5 @@ searchBtn.addEventListener('click', () => {
 const firstLetterCapital = (word)=>{
     let fLetter = word[0]
     let lLetters = word.slice(1)
-     return (fLetter.toUpperCase() + lLetters)
+     return (fLetter.toUpperCase() + lLetters.toLowerCase())
 }
