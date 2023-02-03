@@ -53,7 +53,7 @@ label{
     top: 1.7rem;
     left: .7rem;
     color: rgb(41, 38, 38);
-    transition: 800ms;
+    transition: 500ms;
 }
 
 .search-box button{
