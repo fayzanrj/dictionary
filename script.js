@@ -48,28 +48,26 @@ search.addEventListener('focusout', () => {
 // }
 
 
-const getExplanation = (word)=>{
+const getExplanation = (word) => {
 
     let searchExplain = fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-        searchExplain.then((response)=>{
-            return response.json()
-        }).then((value)=>{
-            // console.log(value)
-            console.log(value[0])
-            for(let i = 0 ; i < value[0].meanings.length ; i++){
-                if(i == value[0].meanings.length - 1){
-                    explainbox.innerHTML += 
-                    `${value[0].meanings[i].partOfSpeech.toUpperCase()} : ${value[0].meanings[i].definitions[0].definition} <br>` 
-                } else{
-                    explainbox.innerHTML += 
-                    `${value[0].meanings[i].partOfSpeech.toUpperCase()} : ${value[0].meanings[i].definitions[0].definition} <br><br>` 
-                }
-                
+    searchExplain.then((response) => {
+        return response.json()
+    }).then((value) => {
+        // console.log(value)
+        console.log(value[0])
+        for (let i = 0; i < value[0].meanings.length; i++) {
+            if (i == value[0].meanings.length - 1) {
+                explainbox.innerHTML +=
+                    `${value[0].meanings[i].partOfSpeech.toUpperCase()} : ${value[0].meanings[i].definitions[0].definition} <br>`
+            } else {
+                explainbox.innerHTML +=
+                    `${value[0].meanings[i].partOfSpeech.toUpperCase()} : ${value[0].meanings[i].definitions[0].definition} <br><br>`
             }
-
-            // explainBox1.innerHTML = `Noun : ${value[0].meanings[0].definitions[0].definition}` 
-            // explainBox2.innerHTML = `Verb : ${value[0].meanings[1].definitions[0].definition}`
-        })
+        }
+    }).catch((err) => {
+        explainbox.innerHTML = "Couldn't find the entered word in the database"
+    })
 }
 
 searchBtn.addEventListener('click', () => {
@@ -77,16 +75,23 @@ searchBtn.addEventListener('click', () => {
         wordToTranslate = search.value
         getExplanation(wordToTranslate)
         meaning.innerHTML = ""
-        word.innerHTML = wordToTranslate
+        word.innerHTML = firstLetterCapital(wordToTranslate)
         explainbox.innerHTML = ""
-        if(search.value != ""){
+        if (search.value != "") {
             search.value = ""
             label.style.top = '1.7rem'
             label.style.left = ".7rem"
             label.style.fontSize = "1rem"
         }
-        
+
     } else {
-        console.log("a")
+        word.innerHTML= " "
+        explainbox.innerHTML = "<b>Write something before pressing Search</b>"
     }
 })
+
+const firstLetterCapital = (word)=>{
+    let fLetter = word[0]
+    let lLetters = word.slice(1)
+     return (fLetter.toUpperCase() + lLetters)
+}
