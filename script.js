@@ -4,6 +4,7 @@ let searchBtn = document.getElementById('search-btn')
 let word = document.getElementById('word')
 let meaning = document.getElementById('meaning')
 let explainbox = document.getElementById('explainbox')
+let wordToTranslate;
 
 const labeltransition = () => {
     label.style.top = '.5rem'
@@ -64,6 +65,7 @@ const getExplanation = (word) => {
             }
         }
     }).catch((err) => {
+        explainbox.innerHTML = ""
         explainbox.innerHTML = "Couldn't find the entered word in the database"
     })
 }
