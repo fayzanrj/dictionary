@@ -3,9 +3,7 @@ let search = document.getElementById('search')
 let searchBtn = document.getElementById('search-btn')
 let word = document.getElementById('word')
 let meaning = document.getElementById('meaning')
-let explainBox1 = document.getElementById('explain-box1')
 let explainbox = document.getElementById('explainbox')
-let wordToTranslate;
 
 const labeltransition = () => {
     label.style.top = '.5rem'
@@ -54,8 +52,8 @@ const getExplanation = (word) => {
     searchExplain.then((response) => {
         return response.json()
     }).then((value) => {
-        // console.log(value)
-        console.log(value[0])
+        console.log(value)
+        // console.log(value[0])
         for (let i = 0; i < value[0].meanings.length; i++) {
             if (i == value[0].meanings.length - 1) {
                 explainbox.innerHTML +=
@@ -74,11 +72,10 @@ const getExplanation = (word) => {
 search.addEventListener('keyup', (e) => {
     if (e.keyCode >= 65 && e.keyCode <= 90 || e.keyCode == 8) {
         if (search.value != "") {
-            word.innerHTML = firstLetterCapital(search.value)
-            wordToTranslate = search.value
-            getExplanation(wordToTranslate)
-            meaning.innerHTML = ""
             explainbox.innerHTML = ""
+            getExplanation(search.value)
+            word.innerHTML = firstLetterCapital(search.value)
+            meaning.innerHTML = ""
             if (search.value == "") {
                 label.style.top = '1.7rem'
                 label.style.left = ".7rem"
